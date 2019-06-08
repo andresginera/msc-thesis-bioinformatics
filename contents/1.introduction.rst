@@ -2,14 +2,124 @@
 1. Introduction
 ===============
 
-1.1. Computer-assisted molecular design (CAMD)
+1.1. Context
+============
+
+The discovery of new materials and components has been crucial for the development of the humankind through all their history. Once we learnt the importance of the new materials and their physical-chemical properties for supplying our lifestyle, since the 19th century until nowadays, the need of creation of new materials grow up, and with it the development of analytic synthesis for that purpose. The first one was from 1828, when Friedrich Wöhler produced urea with potassiumcyanate and ammoniumsulfate (Leicesterand Klickstein, 1951). 
+
+This necessity has increased exponentially over the last century in various fields, such as, electrical engineering, biology or medicine. Respecting the last one, the importance lies on the development of new and better drugs. 
+
+The search for new drugs has accompanied humanity for the whole its existence, mainly with the discovery of natural components with healing properties, but it was not until the mid-nineteenth century when scientist began to isolate and purify the active principles. The next progress was during the last century when pharmacologist, for design new remedies, applied random chemical substitutions to a known structural drug or used combinatorial chemistry techniques, such as fragment-based design (Ewa Kedzierska, 2018). 
+
+However, with all these techniques we haven’t found a great number of new medicines and there is still a necessity of create new and better drugs; specially with the current growing concern of drug-resistant diseases. This is because (space)
+The current solution for searching new medicines is the rational design, which is based on the identification of suitable targets in the body and designing the structure to interact with that target (Ewa Kedzierska 2018). This rational designing is depending on the studies of molecular interactions at low levels, and in order to achieve this it has been used the assistance of the informatics.
+
+The use of computational resources in the organic chemistry and drug industry is not something new. Since the 1960s graphics hardware and prototypical software were have been used in the drug design and the Dendral Project of Stanford University in the 1960s make the use of this resource very promising. However, until the late 1990s the use of computers was too limited and because computers could only deal with very simple molecules which humans did not need much assistance (Fan Feng, 2018). But nowadays, computers can generate molecular models that can be a great assistant in the design and generation of new drugs. 
+
+1.2. Molecullar modeling
+========================
+
+The definition of molecular modelling by Giovanni and Ramiro from the Santander Industrial University is: the development and application of physical and chemical theories in the description of a phenomenon whose model, exclusively solved by computer, predicts the behaviour of the phenomenon (Giovanni).
+
+It is about the translation of the 3D coordinates of the structure of the molecule into an energy value and these calculations needed cannot be performed without a computer because their complexity. The model with the lowest energy value will be the most probably conformation of the molecule (Florent Barbault, 2015).
+
+There are three ways for describing molecular systems:
+
+•	Ab initio quantum mechanics. 
+•	Semi-empirical quantum mechanics.
+•	Molecular mechanics.
+
+Each of these three ways provides us different accuracies on the modelling simulation and they have heterogenous needs.
+
+1.	Ab initio quantum mechanics.
+
+This technique uses the Quantum Mechanics (QM) to obtain the energy of the atomic coordinates by resolving the Schrödinger        equation through a Hamiltonian (H) independent-time function. Both nucleus and electrons are treated explicitly and are described by wave functions.
+
+(Equation)
+
+However, the exact solution is limited to one-electron molecules and for other systems we need approximations (Florent Barbault, 2015). These approximations require a great computational power, and not every molecular system can be modelled. 
+
+2.	Semi-empirical quantum mechanics.
+
+One way to avoid the problem of the extensive computational demanding and use the QM in larger systems is to treat the electronic Hamiltonian (Hele) more easily for solve approximately the Schrodinger equation. In this way we can obtain more accuracy in the systems than with molecular mechanics, with less computational demanding than QM (Giovanni). 
+
+3.	Molecular mechanics. 
+
+Lastly, we have the classical molecular mechanics (MM) for describing the molecular system, by doing big approximations and using classical or Newtonian mechanics. This descriptor does not consider the nucleus and electrons as independent entities like the two previous, but consider the whole atom (both nucleus and electrons) as a unique entity. To define this atom entity in a particular atom it is necessary to have previously empirical parameters. The bonds of the atoms are represented via harmonic forces). 
+
+The potential energy of the system is calculated using force fields, a set of functions that are the sum of the bonded (bonds, angles, impropers, dihedrals) and non-bonded terms (electrostatic and Van der Waals) (VanommesIaghe, 2014 (LauraTi)). 
+
+The molecular model obtained is the lowest accurate, but is also the lowest computational demanding. It is used in big molecular systems like biological molecule with thousand of atoms. 
+
+ (Image comparing the three descriptors)
+ 
+The generation of molecular modelling for drug design can contribute in different aspects like decreasing the cost and designing time and even improving already existent medicines. But we as we have said before, the design of new biomolecules from already known medicines, it has not allowed us to explore much the chemical-biological space. 
+
+In order to achieve it, we need first to design biological structure systems from a starting situation of lacking data. 
+
+1.3. Computer-assisted molecular design (CAMD)
 ==============================================
 
-1.2. Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modeling (GAUDImm)
+* a bullet point using "*"
+
+  - a sub-list using "-"
+
+    + yet another sub-list
+
+  - another item
+
+In this situation, for the creation of new biomolecules, we need to consider three main aspects:
+
+* Certain physicochemical rules to guarantee that the new molecule can exist.
+
+* The existence of different types of interactions in various situations:
+
+  - Covalent Bonds.
+  
+  - Coordination.
+  
+  - Non-bonding interactions (Van der Waals, dispersive forces, hydrogen bonds and polar interactions).
+  
+* The chemobiological space.
+
+This last one aspect refers to the fact that the system of the new biomolecule must be a hybrid system that merges chemical compounds and biological moieties in a functional entity. This space takes into account the conformational, chemical and biological axis:
+
+(Image of chemobiological space)
+
+The conformational axis refers to all the possible geometric operations that a set of atoms can experiment: translation, rotation, torsion, rocking and bouncing. This is responsible of the stability of the structure.
+The chemical axis, for its part, refers to the addition of atoms in a molecules or specific substitution of its functional groups.
+
+And lastly, the biological axis, is responsible of the biological aspect of the structure like mutations or active regions.
+There are several strategies for molecular design at the moment like Monte Carlo-like algorithms (MC) (Das & Baker, 2008), or evolutionary algorithms (EA), specifically genetical algorithms (GA). These strategies are used by commercial docking programs such as GOLD (Jones et al., 1997) or AutoDock (Trott & Olson, 2010), among others.
+
+These applications can work in a very efficient war, but they only work in specific situations and for the situation raised previously of general drug design with little previous data, a better tool would be GaudiMM, designed by Rodríguez Guerra.
+
+1.4. Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modeling (GAUDImm)
 ================================================================================================
 
-1.3. Optimization problems
-==========================
+1.4.1. Description
+------------------
 
-1.4. User Experience
-====================
+GaudiMM (Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modeling) is a modular platform for rapid 3D sketching of molecular systems. It combines a Multi-Objective Genetic Algorithm (MOGA), the NGSA-II multi objective GA, with diverse molecular descriptors to overcome the difficulty of generating candidate models for systems with scarce structural data. Its grounds consist in transforming any molecular descriptor (i.e. those generally used for analysis of data) as a guiding objective for PES explorations (Pedregal, 2017). 
+
+With this MOGA the program can optimize all the needed variables (objectives) at the same time; and this is a key aspect in the CAMD of new biomolecules. NGSA-II generates randomly an initial population of possible solutions and is evaluated with several objectives, each one with a fitness value. Then, the best solutions are selected to recombine or mutate and among the precedent solutions and the new solutions generated, the best ones will be selected to the next generation. This process is repeated several times and, in the end, we will have a final pool of the best solutions generated.
+
+(Image of NGSA-II)
+
+GaudiMM works on Chimera which works as the main molecular framework to generate the solutions and also to reproduce the 3D drawing of the solution. 
+
+1.4.2. Examples
+---------------
+
+
+1.4.3. Limitations
+------------------
+
+As we have said before, the current version of GaudiMM has problems to solve normal dockings, when other programs, like GOLD, can perform them without problems. This is because GaudiMM spent a great part of the computing time on removing very poor solutions or even solutions not possible in a real situation. Meanwhile in GOLD, as is a specialized in molecular dockings, there are certain presumptions to forbit a range of solutions and thus spent all the computational power in searching the best solution. This is a negative consequence of being a program for general uses.
+
+Furthermore, the current version is a reference implementation and it not thought to be as efficient as possible. GaudiMM only uses a core during the whole, and as a consequence, the execution time is extremely large. 
+
+The main project of this master thesis is about the improvement of the performance of GaudiMM, implementing a parallelized version to decrease the execution time. 
+
+1.5. Challenges of the Bioinformatics tools
+===========================================
