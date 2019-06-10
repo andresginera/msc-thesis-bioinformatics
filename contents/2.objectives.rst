@@ -1,0 +1,15 @@
+=============
+2. Objectives
+=============
+
+
+As we have seen, GaudiMM has potential for the design of new drugs due to its
+ability of working in systems with no previous data, and we had the motivation
+for **improving the program** with the ultimate goal a reference program for
+molecular modelling.
+
+Our efforts in improvements were focused in two main aspects of the program: 
+
+- Performance’s optimization: **PGaudi**. The development of a GaudiMM extension for parallel execution of GaudiMM jobs.
+
+- UX improvement: **GaudiViewX**. The creation of an updated version of GaudiView to view and analyse the GaudiMM output solutions with new functionalities.
