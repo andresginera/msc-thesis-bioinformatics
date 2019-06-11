@@ -167,6 +167,7 @@ different.
 
     FOR log-file in log-files generated
         EXECUTE merge log-file in a unqiue log-file output
+    FOREND
 
 The creation of the two output files doesn't have much mystery. PGaudi merges
 all the solutions in a unique population and uses a similar function to the
@@ -178,10 +179,11 @@ For creating the unique ``.gaudi-log`` file, PGaudi merge with a simple function
 using basic methos for read and write files. 
 
 .. figure:: fig/pgaudi_scheme.png
+
     :alt: Diagram of PGaudi's operation
     :align: center
     :scale: 75%
-    
+
     Diagram of the main idea of PGaudi's performance
 
 3.5. Usage

@@ -1,3 +1,170 @@
+============
+4 GaudiViewX
+============
+
+4.1. ChimeraX and Python3
+=========================
+
+UCSF ChimeraX is the next-generation molecular visualization program from the
+Resource for Biocomputing, Visualization, and Informatics (RBVI). It is
+implemented in Python 3, instead of Python 2 like the previous version of
+Chimera, with chunks of C++ thrown in for performance. cite(UCSF ChimeraX:
+Meeting modern challenges in visualization and analysis. Goddard TD, Huang CC,
+Meng EC, Pettersen EF, Couch GS, Morris JH, Ferrin TE. Protein Sci. 2018
+Jan;27(1):14-25.)
+
+
+Python 2 will not be maintained past 2020, in six months since this thesis has
+been delivered. (https://www.python.org/dev/peps/pep-0373/) and many Python
+projects developers have made their intention to drop Python 2 support before in
+or before 2020 (https://python3statement.org/). For that reason, we though in
+initiate a process to migrate the Insilichem projects to Python 3. 
+
+We decided to start with the light interface of GaudiView that uses Chimera to
+display the 3D drawing of the GAUDImm solutions' structure. We wanted to adapt
+the program to the newer version of the framework ChimeraX that has several
+advantages relative to Chimera like a high-performance manipulation and
+rendering of large numbers of atoms or a system of **ChimeraX bundles** for easy
+installation and updates, with dependencies handled correctly, among others
+benefits.
+
+ChimeraX is designed to be extensible, like the browsers and its extensions.
+These ChimeraX extensions are called bundles and are installed directly inside
+ChimeraX with all the needed dependencies.
+
+We though in creating a bundle for ChimeraX of an upgraded version of GaudiView,
+but based in Python3: **GaudiViewX**, with more functionalities.
+
+4.2. Methodology of GaudiViewX
+==============================
+
+The graphical interface of GaudiViewX uses PyQt5 instead of the ``tinker``
+module, due to the integration by default of PyQt5 from ChimeraX. PyQt5 is a set
+of Python bindings for v5 of the Qt application framework from The Qt Company.
+Qt is a set of C++ libraries and development tools that includes platform
+independent abstractions for graphical user interfaces, networking, threads,
+regular expressions, etc.
+(https://www.riverbankcomputing.com/static/Docs/PyQt5/introduction.html)
+
+
+
+4.3. Usage
 ==========
-GaudiViewX
-==========
+
+4.3.1. Basic Use
+----------------
+
+For open a new window of GaudiViewX, select the tool GaudiViewX inside Tools
+-> Insilichem -> GaudiViewX:
+
+.. image:: fig/selection_gaudiviewx.png
+    :align: center
+
+And a new **window** will open for searching a Gaudi's output file. After the
+selection of the file, a table with all the solutions will appear in your
+ChimeraX. Selecting any of the solution will display the 3D drawing of the
+molecules in your ChimeraX:
+
+.. image:: fig/open_one_solution.png
+    :align: center
+
+4.3.2. Toolbar
+--------------
+
+In the toolbar there are 5 utilities:
+
+.. image:: fig/toolbar.png
+    :align: center
+
+|icon1| | Open
+************
+
+.. |icon1| image:: fig/icon_folder.png
+    :width: 4%
+
+Open a new window to open a new output file closing all the models of a
+previous output file loaded.
+
+|icon2| | Save
+**************
+
+.. |icon2| image:: fig/icon_save.png
+    :width: 4%
+
+Open a new window to save the current data loaded in the table in the
+same file or in a new one.
+
+|icon3| | Filter
+****************
+
+.. |icon3| image:: fig/checklist.png
+    :width: 4%
+
+This option let the user to select among all the solutions with ones of
+interest. The user has to choose the objective for which he wants to filter
+and select the logic behavior (>, <, =, ≥, ≤, ≠) and threshold of the filter:
+
+.. image:: _images/filter.png
+    :align: center
+
+|icon4| | Clustering
+********************
+
+.. |icon4| image:: fig/cluster-icon.png
+    :width: 4%
+
+
+It allows you to do a clustering of the solutions loaded in the table. For
+doing the clustering, you must specify:
+   
+- The **objective** for which you want to do the clustering.
+- The behavior on **maximazing** or **minimazing** this objective.
+- The **threshold of the RMSD** which which will determine if two solutions are considered equal or different.
+
+.. image:: _images/clustering.png
+    :align: center
+
+
+With this way, all the cluster will have as a nucleus the best possible
+solution for that cluster.
+
+
+|icon5| | Help
+**************
+
+.. |icon5| image:: fig/Info_Simple.svg.png
+    :width: 4%
+
+
+Displays the internal help window.
+
+4.3.3. Table editing
+--------------------
+
+You can also edit the different solutions loaded in the table:
+
+* You can **add** new solutions from a different files as long as it has the same objectives.
+* You can also **delete** the solutions selected.
+
+And with the buttons of **Undo** and **Reset** you can returned to a previous state of
+the table. You can undo until 5 actions and the button Reset will restore all
+the table to the original ones from the first file loaded.
+
+4.3.4. Command Line
+-------------------
+
+GaudiViewX has also incorporated a command line, that has the advantage with
+respect the ChimeraX command line of being executed each time you select a new
+solution. In this way you can watch, for example the residue 8 in all solution
+writing ``show :8`` in the command line only once.
+
+-----
+
+Further information
+-------------------
+
+For more reading of GaudiViewX, see the official documentation at:
+https://gaudiviewx.readthedocs.io/.
+
+The source code is available in GitHub at:
+https://github.com/andresginera/gaudiviewx and in the Appendix section.

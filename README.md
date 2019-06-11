@@ -23,6 +23,10 @@ Development of complementary extensions for the GAUDImm suite
 
 ## 4. GaudiViewX
 
+- ChimeraX and Python3
+- Methodology of GaudiViewX
+- Usage
+
 ## 5. Results and Discussion
 
 ## 6. Conclusiones
