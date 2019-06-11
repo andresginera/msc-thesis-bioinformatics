@@ -96,7 +96,70 @@ situations, in which case, PGaudi removes one of the repeated solutions.
 At the end of the whole process, PGaudi gathered the remaining solutions in a
 unique output file and merge all the log files in the output directory.
 
-3.4. Usage
+3.4. Coding PGaudi
+==================
+
+3.4.1. Creation of files for parallelization
+--------------------------------------------
+
+.. code-block:: console
+
+    READ input_file.yaml 
+        SAVE data of input_file.yaml
+        IF simplify processes
+            THEN simplify GA variables
+        WRITE data in new files
+
+PGaudi uses the ``yaml`` code for reading the YAML input file and save the data
+in a Python dicitionary object. If the user doesn't specify to not use the
+simplification of the subprocesses, the data variable is modified to decerase
+the values of the variables of the GA previously commented. Then, using the same
+module write as many files as subprocesses will generate. 
+
+3.4.2. Generation of the subprocesses
+-------------------------------------
+
+.. code-block:: console
+
+    FOR file in new files (PARALLEL)
+        EXECUTE a Gaudi run process of the file
+    FOREND
+
+For the execution of the parallel computing PGaudi uses the ``multiprocessing``
+module and creates a ``multiprocessing.Pool`` which is an abstraction to handle
+the subprocess. The ``Pool`` is executed by the function
+``multiprocessing.Pool.map_async`` which recieves a function, the execution
+``gaudi run``, and iterable, the list of names of the new files. 
+
+3.4.3. Removing of double solutions
+-----------------------------------
+
+.. code-block:: console
+
+    Save all combinations of outputs pair
+    FOR combination in combinations (PARALLEL)
+        FOR pair of solutions in combination
+            IF equal solutions
+                THEN EXECUTE remove one solution randomly
+        FOREND
+    FOREND
+
+
+
+
+3.4.4. Gathering of the solutions and output files
+--------------------------------------------------
+
+
+
+
+.. figure:: fig/pgaudi_scheme.png
+    :alt: Diagram of PGaudi's operation
+    :align: center
+
+    Diagram of the main idea of PGaudi's performance
+
+3.5. Usage
 ==========
 
 PGaudi is designed to be usable and therefore its simplicity. After its
@@ -110,7 +173,7 @@ program is executed via the terminal with the command ``pgaudi``:
 After this command a proces of PGaudi and its subprocesses will be generated.
 However, here are also some options that the user can specify:
 
-3.4.1. Subprocesses generated
+3.5.1. Subprocesses generated
 -----------------------------
 
 By default, PGaudi automatically detects the number of cores in the machine and
@@ -121,14 +184,14 @@ option ``-p <PROCESSES>``.
 This is useful for using PGaudi in a cluster and if the user doesn't want to use
 all cores of the local machine.
 
-3.4.2. Simplification of subprocesses
+3.5.2. Simplification of subprocesses
 -------------------------------------
 
 Automatically, PGaudi set this option in False to generate computationally
 simpler subprocesses. The user can change this behaviour with the option ``-e,
 --equal`` and PGaudi will generate replicates of the main GAUDImm process. 
 
-3.4.3. Summary
+3.5.3. Summary
 --------------
 
 List with all options:
@@ -144,7 +207,7 @@ Usage:
 
 .. code-block:: console
 
-    (insilichem)$ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]
+    $ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]
 
 -----
 

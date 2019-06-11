@@ -18,6 +18,7 @@ Development of complementary extensions for the GAUDImm suite
 - Parallel computing
 - *Internal* parallelization vs *external* parallelization
 - Methodology of the parallelization
+- Coding PGaudi
 - Usage
 
 ## 4. GaudiViewX
