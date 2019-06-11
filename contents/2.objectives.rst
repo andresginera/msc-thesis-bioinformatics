@@ -10,6 +10,9 @@ molecular modelling.
 
 Our efforts in improvements were focused in two main aspects of the program: 
 
-- Performance’s optimization: **PGaudi**. The development of a GaudiMM extension for parallel execution of GaudiMM jobs.
+- Performance’s optimization: **PGaudi**. The development of a GaudiMM extension
+  for parallel execution of GaudiMM jobs. (Python2.7)
 
-- UX improvement: **GaudiViewX**. The creation of an updated version of GaudiView to view and analyse the GaudiMM output solutions with new functionalities.
+- UX improvement: **GaudiViewX**. The creation of an updated version of
+  GaudiView to view and analyse the GaudiMM output solutions with new
+  functionalities. (Python3.6 and PyQt5)

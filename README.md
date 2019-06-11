@@ -1,19 +1,28 @@
-Development of complementary suites for the GAUDImm suite
-=========================================================
+Development of complementary extensions for the GAUDImm suite
+=============================================================
 
 *By Andrés Giner Antón*
 
 ## 1. Introduction
 
+- Context
+- Molecular modelling
+- Computer-assisted molecular design (CAMD)
+- Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modeling (GAUDImm)
+- Challenges of the Bioinformatics tools
+
 ## 2. Objectives
 
-## 3. Methology
+## 3. PGaudi
 
-## 4. PGaudi
+- Parallel computing
+- *Internal* parallelization vs *external* parallelization
+- Methodology of the parallelization
+- Usage
 
-## 5. GaudiViewX
+## 4. GaudiViewX
 
-## X.
+## 5. Results and Discussion
 
 ## 6. Conclusiones
 
