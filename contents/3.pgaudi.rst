@@ -136,7 +136,8 @@ the subprocess. The ``Pool`` is executed by the function
 
 .. code-block:: console
 
-    Save all combinations of outputs pair
+    SAVE all possible combinations of outputs pair
+
     FOR combination in combinations (PARALLEL)
         FOR pair of solutions in combination
             IF equal solutions
@@ -144,19 +145,43 @@ the subprocess. The ``Pool`` is executed by the function
         FOREND
     FOREND
 
+    SAVE the new modified populations of solutions
 
+The removing of the double solutions runs in a parallel way too. Firstly, it
+saves all the possible combinations between all the outputs generated after the
+completation of the subprocesses. Then, compare the 3D structure of one solution
+to another solution's structure from another population.
 
+The solutions from a same population are not compare because they are already
+different.
 
 3.4.4. Gathering of the solutions and output files
 --------------------------------------------------
 
+.. code-block:: console
 
+    FOR population in population
+        EXECUTE merge population
+    FOREND
+    WRITE a unique output file with the total population
 
+    FOR log-file in log-files generated
+        EXECUTE merge log-file in a unqiue log-file output
+
+The creation of the two output files doesn't have much mystery. PGaudi merges
+all the solutions in a unique population and uses a similar function to the
+original GAUDImm function to create the output file ``.gaudi-output``, which
+uses the ``yaml`` module. For that, PGaudi saves all the solutions, with other
+information in a Python dicitionary obejct. 
+
+For creating the unique ``.gaudi-log`` file, PGaudi merge with a simple function
+using basic methos for read and write files. 
 
 .. figure:: fig/pgaudi_scheme.png
     :alt: Diagram of PGaudi's operation
     :align: center
-
+    :scale: 75%
+    
     Diagram of the main idea of PGaudi's performance
 
 3.5. Usage
