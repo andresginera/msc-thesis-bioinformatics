@@ -5,15 +5,6 @@
 4.1. ChimeraX and Python3
 =========================
 
-UCSF ChimeraX is the next-generation molecular visualization program from the
-Resource for Biocomputing, Visualization, and Informatics (RBVI). It is
-implemented in Python 3, instead of Python 2 like the previous version of
-Chimera, with chunks of C++ thrown in for performance. cite(UCSF ChimeraX:
-Meeting modern challenges in visualization and analysis. Goddard TD, Huang CC,
-Meng EC, Pettersen EF, Couch GS, Morris JH, Ferrin TE. Protein Sci. 2018
-Jan;27(1):14-25.)
-
-
 Python 2 will not be maintained past 2020, in six months since this thesis has
 been delivered. (https://www.python.org/dev/peps/pep-0373/) and many Python
 projects developers have made their intention to drop Python 2 support before in
@@ -28,12 +19,20 @@ rendering of large numbers of atoms or a system of **ChimeraX bundles** for easy
 installation and updates, with dependencies handled correctly, among others
 benefits.
 
+UCSF ChimeraX is the next-generation molecular visualization program from the
+Resource for Biocomputing, Visualization, and Informatics (RBVI). It is
+implemented in Python 3, instead of Python 2 like the previous version of
+Chimera, with chunks of C++ thrown in for performance. cite(UCSF ChimeraX:
+Meeting modern challenges in visualization and analysis. Goddard TD, Huang CC,
+Meng EC, Pettersen EF, Couch GS, Morris JH, Ferrin TE. Protein Sci. 2018
+Jan;27(1):14-25.)
+
 ChimeraX is designed to be extensible, like the browsers and its extensions.
 These ChimeraX extensions are called bundles and are installed directly inside
 ChimeraX with all the needed dependencies.
 
 We though in creating a bundle for ChimeraX of an upgraded version of GaudiView,
-but based in Python3: **GaudiViewX**, with more functionalities.
+but based in Python 3: **GaudiViewX**, with more functionalities.
 
 4.2. Methodology of GaudiViewX
 ==============================
@@ -46,10 +45,8 @@ independent abstractions for graphical user interfaces, networking, threads,
 regular expressions, etc.
 (https://www.riverbankcomputing.com/static/Docs/PyQt5/introduction.html)
 
-
-
-4.3. Usage
-==========
+4.3. Usage (THE CURRENT VERSION IS CHANGING, SO THIS IS DEPRECATED)
+===================================================================
 
 4.3.1. Basic Use
 ----------------
@@ -143,10 +140,10 @@ Displays the internal help window.
 
 You can also edit the different solutions loaded in the table:
 
-* You can **add** new solutions from a different files as long as it has the same objectives.
+* You can **add** new solutions from a different file as long as it has the same objectives.
 * You can also **delete** the solutions selected.
 
-And with the buttons of **Undo** and **Reset** you can returned to a previous state of
+And with the buttons of **Undo** and **Reset** you can return to a previous state of
 the table. You can undo until 5 actions and the button Reset will restore all
 the table to the original ones from the first file loaded.
 

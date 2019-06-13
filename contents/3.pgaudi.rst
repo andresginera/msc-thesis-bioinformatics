@@ -6,9 +6,9 @@
 =======================
 
 As we have seen previously GAUDImm has potential to be optimised in its
-performace. Nowadays, almost all computers have multicore processors but GAUDImm
-uses only one core to execute a job, so we thouhgt in a parallel computing
-approach for the peformance optimization. 
+performance. Nowadays, almost all computers have multicore processors but GAUDImm
+uses only one core to execute a job, so we thought in a parallel computing
+approach for the performance optimization. 
 
 Parallel computing has been on stage since the 1970s but it has not been until
 now that the efforts to achieve efficient parallel computing have been relevant.
@@ -25,18 +25,18 @@ NGSA-II algorithm, so we though in using the multiprocessing option for DEAP,
 the Python module which apply the MOGA of GAUDImm, for which we would need to
 change the GAUDImm code. This is was the *internal* parallelization approach.
 
-But we also thouhgt in another way of implementation, an *external*
+But we also thought in another way of implementation, an *external*
 parallelization, consisting of a code that manually divides the main GAUDImm
-process in subprocesses for then gathers the solutions and generates an unique
+process in subprocesses for then gathers the solutions and generates a unique
 output.
 
 Initially the internal parallelization seemed smoother, cleaner and more
 optimise, however it wasn't easy to implement. DEAP uses the ``multiprocessing``
 module for the generation of subprocesses to carry out the parallel computing.
-To achieve this aim, it is necessary to perform a seriallization process in
+To achieve this aim, it is necessary to perform a serialization process in
 which the process, with all its Python object hierarchy, is converted into a
 byte stream. Thus, the subprocess can managed by the ``multiprocessing`` module,
-and they can sending information between them. 
+and they can send information between them. 
 
 The problem is that the *pickling* process of ``multiprocessing`` is led by the
 ``pickle`` module that has limitations on what can be pickled. The classes are
@@ -45,7 +45,7 @@ none of the class’s code or data is pickled. This problem is visible when
 applying the *internal* parallelization in GAUDImm with a ``PicklingError``
 exception, at the time of *pickling* the solutions. The obvious way to solve the
 problem is to rewrite the code in order to make the classes importable. However,
-GAUDImm solutions are build over Chimera classes, which rely in the core
+GAUDImm solutions are built over Chimera classes, which rely in the core
 development of Chimera, which is written in C++. This would be a big problem
 and could extent the development a great deal.
 
@@ -66,11 +66,11 @@ output of the GA. The sharing of information between the different subprocesses
 running a GA could be very positive; they might share their best solution every
 X generations. However, as we have seen in the previous section, this procedure
 would be hindered because of the *pickling*. Hence, we decide to use an
-isolation tecnique, in which the subprocesses were totally independent.
+isolation technique, in which the subprocesses were totally independent.
 
 This isolation can help the main GAUDImm process the find the best solutions.
 The fact that every subprocess is an independent GA, means that every subprocess
-begin with a unique initial population and will have an unequaled evolutionary
+begin with a unique initial population and will have an unequalled evolutionary
 process. As a consequence, the whole GAUDImm job will explore more solutions and
 will generate a very diverse pool of solutions ensuring an output of quality.
 
@@ -109,8 +109,8 @@ unique output file and merge all the log files in the output directory.
         WRITE data in new files
 
 PGaudi uses the ``yaml`` code for reading the YAML input file and save the data
-in a Python dicitionary object. If the user doesn't specify to not use the
-simplification of the subprocesses, the data variable is modified to decerase
+in a Python dictionary object. If the user doesn't specify to not use the
+simplification of the subprocesses, the data variable is modified to decrease
 the values of the variables of the GA previously commented. Then, using the same
 module write as many files as subprocesses will generate. 
 
@@ -126,8 +126,8 @@ module write as many files as subprocesses will generate.
 For the execution of the parallel computing PGaudi uses the ``multiprocessing``
 module and creates a ``multiprocessing.Pool`` which is an abstraction to handle
 the subprocess. The ``Pool`` is executed by the function
-``multiprocessing.Pool.map_async`` which recieves a function, the execution
-``gaudi run``, and iterable, the list of names of the new files. 
+``multiprocessing.Pool.map_async`` which receives a function, the execution
+``gaudi run``, and an iterable, the list of names of the new files. 
 
 3.4.3. Removing of double solutions
 -----------------------------------
@@ -147,7 +147,7 @@ the subprocess. The ``Pool`` is executed by the function
 
 The removing of the double solutions runs in a parallel way too. Firstly, it
 saves all the possible combinations between all the outputs generated after the
-completation of the subprocesses. Then, compare the 3D structure of one solution
+completion of the subprocesses. Then, compare the 3D structure of one solution
 to another solution's structure from another population.
 
 The solutions from a same population are not compare because they are already
@@ -164,17 +164,17 @@ different.
     WRITE a unique output file with the total population
 
     FOR log-file in log-files generated
-        EXECUTE merge log-file in a unqiue log-file output
+        EXECUTE merge log-file in a unique log-file output
     FOREND
 
 The creation of the two output files doesn't have much mystery. PGaudi merges
 all the solutions in a unique population and uses a similar function to the
 original GAUDImm function to create the output file ``.gaudi-output``, which
 uses the ``yaml`` module. For that, PGaudi saves all the solutions, with other
-information in a Python dicitionary obejct. 
+information in a Python dictionary object. 
 
 For creating the unique ``.gaudi-log`` file, PGaudi merge with a simple function
-using basic methos for read and write files. 
+using basic methods for read and write files. 
 
 .. figure:: fig/pgaudi_scheme.png
 
@@ -195,7 +195,7 @@ program is executed via the terminal with the command ``pgaudi``:
 
     $ pgaudi path/to/some_file.gaudi-input
 
-After this command a proces of PGaudi and its subprocesses will be generated.
+After this command a process of PGaudi and its subprocesses will be generated.
 However, here are also some options that the user can specify:
 
 3.5.1. Subprocesses generated
@@ -245,4 +245,4 @@ https://pgaudi.readthedocs.io/.
 The source code is available in GitHub at:
 https://github.com/andresginera/pgaudi and in the Appendix section.
 
-The API documentation is as wll in the Appendix section.
+The API documentation is as well in the Appendix section.

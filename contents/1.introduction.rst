@@ -187,14 +187,14 @@ specific situations. For general cases in conditions where there is an absence
 of initial data, a better tool would be **GAUDImm**, designed by *Jaime
 Rodríguez Guerra*.
 
-1.4. Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modeling (GAUDImm)
+1.4. Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modelling (GAUDImm)
 ================================================================================================
 
 1.4.1. Description
 ------------------
 
 GAUDImm (Genetic Algorithms with Unrestricted Descriptors for Intuitive
-Molecular Modeling) is a modular platform for rapid 3D sketching of molecular
+Molecular Modelling) is a modular platform for rapid 3D sketching of molecular
 systems. It combines a Multi-Objective Genetic Algorithm (MOGA), the NGSA-II
 multi objective GA, with diverse molecular descriptors to overcome the
 difficulty of generating candidate models for systems with scarce structural
@@ -231,7 +231,7 @@ for exploring and analysing.
 
 GAUDImm can generate accurate solutions comparing to other programs of molecular
 modelling, depending on the variables selected in the creation of the YAML file,
-specially in the genes and objectives. However, this program can be seen as a
+especially in the genes and objectives. However, this program can be seen as a
 first step in a molecular modelling process, to generate an initial set of
 solution to later perfect them with Molecular Dynamics and QM/MM optimizations.
 
@@ -302,7 +302,7 @@ time-consuming software can result in a less productive research and the
 improvement in any of the factors involving the UX can not only ease the use of
 these tools but also develop an appropriate learning curve.
 
-Taking into account these challenges in bioinformatis tools, apart from the
+Taking into account these challenges in bioinformatics tools, apart from the
 optimization in the GAUDImm's performance, in this thesis we wanted to improve
 the UX of GAUDImm, focusing on the usable factor of a whole GAUDImm job:
 
@@ -314,7 +314,7 @@ the UX of GAUDImm, focusing on the usable factor of a whole GAUDImm job:
     the usable factor.
 
 If we want GAUDImm to be widely used, we need to ease the use by improve certain
-steps in a GAUDImm process job, scpecially in the first steps of creating the
+steps in a GAUDImm process job, especially in the first steps of creating the
 input file and analysing the output.
 
 .. bibliography:: bibliography.bib
