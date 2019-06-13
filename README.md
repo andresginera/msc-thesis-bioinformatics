@@ -29,8 +29,8 @@ Development of complementary extensions for the GAUDImm suite
 
 ## 5. Results and Discussion
 
-## 6. Conclusiones
+## 6. Conclusions
 
-## 7. Bibliography
+## 7. References
 
 ## 8. Appendix
