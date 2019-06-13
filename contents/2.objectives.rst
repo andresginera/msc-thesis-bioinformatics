@@ -2,17 +2,16 @@
 2. Objectives
 =============
 
-
-As we have seen, GaudiMM has potential for the design of new drugs due to its
-ability of working in systems with no previous data, and we had the motivation
-for **improving the program** with the ultimate goal a reference program for
-molecular modelling.
+As we have seen, GAUDImm has potential for the design of new drugs due to its
+ability of working in general systems with no previous data. We have the
+motivation for **improving the program** with the ultimate goal of a reference
+program for molecular modelling.
 
 Our efforts in improvements were focused in two main aspects of the program: 
 
-- Performance’s optimization: **PGaudi**. The development of a GaudiMM extension
-  for parallel execution of GaudiMM jobs. (Python2.7)
+- Performance’s optimization: **PGaudi**. The development of a GAUDImm extension
+  based in Python 2 for parallel execution of GAUDImm jobs.
 
-- UX improvement: **GaudiViewX**. The creation of an updated version of
-  GaudiView to view and analyse the GaudiMM output solutions with new
-  functionalities. (Python3.6 and PyQt5)
+- UX improvement: **GaudiViewX**. The creation of an updated version of the
+  graphical interface GaudiView to view and analyse the GAUDImm output solutions
+  with new functionalities. The extension is based in Python 3 and PyQt5.
