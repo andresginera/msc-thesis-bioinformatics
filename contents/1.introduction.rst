@@ -220,7 +220,7 @@ responsible of the GAUDImm's job are defined. These variables are classified in
 
 1.	**Genes variables**: they define the molecule system.
 2.	**Objectives variables**: they specify the evaluation of the solutions.
-3.	**Genetic Algorithm variables**: they describe the behaviour of the GA which depends on. Usually only the number of total generations and the number of individuals per population are modified. 
+3.	**Genetic Algorithm variables**: they describe the behaviour of the GA. Usually only the number of total generations and the number of individuals per population are modified. 
 4.	**Output variables**: they define the characteristics of the output of the job.
 5.	**Similarity variables**: they define how the program will distinguish between equal solutions.
 

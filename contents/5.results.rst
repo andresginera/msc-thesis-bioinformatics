@@ -1,0 +1,28 @@
+=========================
+5. Results and Discussion
+=========================
+
+5.1. Parameterization of the performance optimization
+=====================================================
+
+Here it will be presented and discussed the results of execution time reduction
+with PGaudi compared with Gaudi. The results will be, in principle, with a small
+sample of the benchmarking of the paper:
+https://pubs.acs.org/doi/10.1021/jm061277y. The sample are 12 cases randomly
+selected. We will use different values for the parameters of number of
+generations and number of individuals per generation:
+
+- 100 generations and 200 individuals.
+- 160 generations and 320 individuals.
+- 200 generations and 400 individuals.
+
+    Tables and graphics
+
+The radius of searching will be 5A. We though it is a good and fair radius.
+
+5.2. Percentage of success in the whole benchmarking?
+=====================================================
+
+
+5.3. Parameterization of GA variables like mut and cross?
+=========================================================

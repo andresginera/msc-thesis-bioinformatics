@@ -1,0 +1,6 @@
+=============
+7. References
+=============
+
+D:\Escritorio\thesis\contents\bibliography.bib
+/home/andres/practicas/thesis/contents/bibliography.bib
