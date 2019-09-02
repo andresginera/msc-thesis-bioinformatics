@@ -1,0 +1,53 @@
+=============
+6. References
+=============
+
+Al-Ali, R., Kathiresan, N., Anbari, M. El, Schendel, E. R., & Zaid, T. A. (2016). Workflow optimization of performance and quality of service for bioinformatics application in high performance computing. Journal of Computational Science, 15, 3–10. https://doi.org/10.1016/J.JOCS.2016.03.005
+
+Barbault, F., & Maurel, F. (2015). Simulation with quantum mechanics/molecular mechanics for drug discovery. Expert Opinion on Drug Discovery, 10(10), 1047–1057. https://doi.org/10.1517/17460441.2015.1076389
+
+Das, R., & Baker, D. (2008). Macromolecular Modeling with Rosetta. Annual Review of Biochemistry, 77(1), 363–382. https://doi.org/10.1146/annurev.biochem.77.062906.171838
+
+Deb, K. (2001). Multi-Objective Optimization Using Evolutionary Algorithms: An Introduction Multi-Objective Optimization Using Evolutionary Algorithms: An Introduction. Wiley-Interscience Series in Systems and Optimization, (June), 1–24. Retrieved from http://www.iitk.ac.in/kangal/deb.htm
+
+Feng, F., Lai, L., & Pei, J. (2018). Computational Chemical Synthesis Analysis and Pathway Design. Frontiers in Chemistry, 6. https://doi.org/10.3389/fchem.2018.00199
+
+Goddard, T. D., Huang, C. C., Meng, E. C., Pettersen, E. F., Couch, G. S., Morris, J. H., & Ferrin, T. E. (2018). UCSF ChimeraX: Meeting modern challenges in visualization and analysis. Protein Science, 27(1), 14–25. https://doi.org/10.1002/pro.3235
+
+Hartshorn, M. J., Verdonk, M. L., Chessari, G., Brewerton, S. C., Mooij, W. T. M., Mortenson, P. N., & Murray, C. W. (2007). Diverse, high-quality test set for the validation of protein-ligand docking performance. Journal of Medicinal Chemistry, 50(4), 726–741. https://doi.org/10.1021/jm061277y
+
+Jones, G., Willett, P., Glen, R. C., Leach, A. R., & Taylor, R. (1997). Development and Validation of a Genetic Algorithm for Flexible Docking.
+
+Kedzierska, E., Dabkowska, L., Krzanowski, T., Gibula, E., Orzelska-Gorka, J., & Wujec, M. (2018). New Drugs - From Necessity to Delivery. Current Issues in Pharmacy and Medical Sciences, 31(2), 69–75. https://doi.org/10.1515/cipms-2018-0020
+
+Kurosu, M. (2013). Human-computer interaction: Users and contexts of use.
+
+Leicester, H., & Klickstein, H. (1951). A source book in chemistry 1400-1900 (Harvard University Press, ed.). Cambridge (Mass.).
+
+Meyer, E. F., Swanson, S. M., & Williams, J. A. (2000). Molecular modelling and drug design. In Pharmacology & Therapeutics (Vol. 85).
+
+Morales Medina, G., & Rey, R. M. (2009). Molecular and multiscale modeling: review on the theories and applications in chemical engineering. In Ciencia, Tecnología y Futuro (Vol. 3).
+
+Noid, W. G. (2013). Perspective: Coarse-grained models for biomolecular systems. Journal of Chemical Physics, 139(9). https://doi.org/10.1063/1.4818908
+
+O’Brien, T. (2019). Sunsetting Python 2 support. Retrieved June 19, 2019, from https://python3statement.org/
+
+Peter Morville. (2019). User Experience Design. Retrieved June 10, 2019, from https://semanticstudios.com/user_experience_design/
+
+Peterson, B. (2019). PEP 373 -- Python 2.7 Release Schedule | Python.org. Retrieved June 19, 2019, from https://www.python.org/dev/peps/pep-0373/
+
+Praprotnik, M., & Site, L. D. (2013). Multiscale molecular modeling. Methods in Molecular Biology, 924, 567–583. https://doi.org/10.1007/978-1-62703-17-5_21
+
+Rodríguez-Guerra, J. (2017). insilichem/gaudiview: Pre-alpha public release. https://doi.org/10.5281/ZENODO.556352
+
+Rodríguez-Guerra Pedregal, J., Sciortino, G., Guasp, J., Municoy, M., & Maréchal, J.-D. (2017). GaudiMM: A modular multi-objective platform for molecular modeling. Journal of Computational Chemistry, 38(24), 2118–2126. https://doi.org/10.1002/jcc.24847
+
+Sah, S., & G. Vaidya, V. (2012). A Review of Parallelization Tools and Introduction to Easypar. International Journal of Computer Applications, 56(12), 30–34. https://doi.org/10.5120/8944-3108
+
+Sciortino, G., Garribba, E., Rodríguez-Guerra Pedregal, J., & Maréchal, J. D. (2019). Simple Coordination Geometry Descriptors Allow to Accurately Predict Metal-Binding Sites in Proteins. ACS Omega, 4(2), 3726–3731. https://doi.org/10.1021/acsomega.8b03457
+
+The Qt Company. (2019). Introduction — PyQt v5.12 Reference Guide. Retrieved June 19, 2019, from https://www.riverbankcomputing.com/static/Docs/PyQt5/introduction.html
+
+Trott, O., & Olson, A. J. (2010). Software news and update AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading. Journal of Computational Chemistry, 31(2), 455–461. https://doi.org/10.1002/jcc.21334
+
+Vanommeslaeghe, K., Guvench, O., & MacKerell, A. D. (2014). Molecular mechanics. Current Pharmaceutical Design, 20(20), 3281–3292. Retrieved from http://www.ncbi.nlm.nih.gov/pubmed/23947650
