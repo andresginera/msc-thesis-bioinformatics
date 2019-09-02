@@ -8,7 +8,7 @@ Development of complementary extensions for the GAUDImm suite
 - Context
 - Molecular modelling
 - Computer-assisted molecular design (CAMD)
-- Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modeling (GAUDImm)
+- Genetic Algorithms with Unrestricted Descriptors for Intuitive Molecular Modeling (GaudiMM)
 - Challenges of the Bioinformatics tools
 
 ## 2. Objectives
@@ -20,6 +20,8 @@ Development of complementary extensions for the GAUDImm suite
 - Methodology of the parallelization
 - Coding PGaudi
 - Usage
+- Testing methodology
+- Results
 
 ## 4. GaudiViewX
 
@@ -27,10 +29,12 @@ Development of complementary extensions for the GAUDImm suite
 - Methodology of GaudiViewX
 - Usage
 
-## 5. Results and Discussion
+## 5. Conlusions
 
-## 6. Conclusions
+## 6. References
 
-## 7. References
+## 7. Appendix
 
-## 8. Appendix
+- PGaudi's API documentation
+- Testing input file template
+- Additional testing data
