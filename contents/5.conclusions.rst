@@ -1,0 +1,13 @@
+==============
+5. Conclusions
+==============
+
+In this Master’s Thesis two new extensions for the GaudiMM suite have been developed, which will expand its use by improving the performance and the UX.
+
+The performance optimization by an **external parallelization** has accelerated the execution time in fifty times, reaching times values close to the GOLD execution time for dockings in the conditions of low GA values. However, this decrease in the execution time has been accompanied with a reduction in the consistency of the solutions generated, reducing the degree of optimization of the promising solutions, because of the simplification applied.
+
+Therefore, there is a **balance** between the **consistency** of the output and the **execution time**. The generation of new independent and isolated subprocesses increases the probability of getting an optimal result in any of the subprocesses, increasing the overall probability. However, if the simplification of these subprocesses is very large, the one(s) which evolution achieve a good solution will not have a proper evolution to completely optimise it, neither a consistency on the output. Increasing the GA variables could compensate this inconsistency and as a consequence generate better results, but at the expense of increasing the execution time again. However, this increase has a limit and in a certain point there is no more effective evolution of solutions.
+
+This balance between execution time and consistency is very interesting because depending on the objectives and systems worked on, the number of subprocesses generated or the GA variables values can be modified to get the desired results. The next step in improving PGaudi would be the **parametrization** of the parameters involved not only in the GA -number of generations and population size- but also in the parallelization. Another interesting option would be modifying the behaviour or creating new type of simplifications, in order to allow the user to select the one that best suits its interests.
+
+The improvement of the UX by the development of GaudiViewX for the visualization of the GaudiMM/PGaudi outputs will ease the use of GaudiMM and analysis of the results for users without much informatic experience. The next step is the creation of a new graphical interface for the generation and execution of the input file, the GaudiCreate program. As a final step, we thought in a graphical interface that integrates the GaudiMM program and all its extensions like PGaudi and these two extensions, in a **unique executable** program for an easy installation and usage.
