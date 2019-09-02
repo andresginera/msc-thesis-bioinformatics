@@ -2,16 +2,14 @@
 2. Objectives
 =============
 
-As we have seen, GAUDImm has potential for the design of new drugs due to its
-ability of working in general systems with no previous data. We have the
-motivation for **improving the program** with the ultimate goal of a reference
-program for molecular modelling.
+As it has been seen, GaudiMM has great potential for the design of new drugs due to its ability of working in general systems with no previous data. The development of the present Master’s Thesis is focused on the desire of **improving GaudiMM** to turn it into a widely used program and a, reference in the molecule modelling field.
 
-Our efforts in improvements were focused in two main aspects of the program: 
+The efforts were focused on two main aspects of the program:
 
-- Performance’s optimization: **PGaudi**. The development of a GAUDImm extension
-  based in Python 2 for parallel execution of GAUDImm jobs.
+1. Performance’s optimization: **PGaudi**. 
 
-- UX improvement: **GaudiViewX**. The creation of an updated version of the
-  graphical interface GaudiView to view and analyse the GAUDImm output solutions
-  with new functionalities. The extension is based in Python 3 and PyQt5.
+The development of a GaudiMM extension based on Python 2 for parallel execution of GaudiMM jobs.
+
+2. UX improvement: **GaudiViewX**.
+
+The creation of an updated version of the graphical interface GaudiView to view and analyse the GaudiMM output solutions with new functionalities. The extension is based on Python 3 and PyQt5.
