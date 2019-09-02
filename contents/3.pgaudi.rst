@@ -5,137 +5,83 @@
 3.1. Parallel computing
 =======================
 
-As we have seen previously GAUDImm has potential to be optimised in its
-performance. Nowadays, almost all computers have multicore processors but GAUDImm
-uses only one core to execute a job, so we thought in a parallel computing
-approach for the performance optimization. 
+As it has been previously seen, GaudiMM has potential to be optimised in its performance. Nowadays, almost all computers have multicore processors but GaudiMM uses only one core to execute a job, so we thought in a parallel computing approach for the performance optimization.
 
-Parallel computing has been on stage since the 1970s but it has not been until
-now that the efforts to achieve efficient parallel computing have been relevant.
-This is due to the limitation in increasing the clock speed owing to the heat
-dissipation increase proportionally or more, and to maintain the same chip area
-the interest in parallel tecnhiques has growth. (A Review of Parallelization Tools and Introduction to Easypar)
+Parallel computing has been on stage since the 1970s but it has not been until recent times that the efforts to achieve efficient parallel computing have been relevant. This is due to the limitation that increasing the clock speed implies difficulties in heat dissipation, which increases proportionally or more to the speed. Besides, the interest in maintaining the same chip area in parallel techniques has grown (Sah & G. Vaidya, 2012).
 
 3.2. *Internal* parallelization vs *external* parallelization
 =============================================================
 
-The main question to answer was which approach to parallelization choose.
-GAUDImm spent the most part of the executing evaluating the solutions with the
-NGSA-II algorithm, so we though in using the multiprocessing option for DEAP,
-the Python module which apply the MOGA of GAUDImm, for which we would need to
-change the GAUDImm code. This is was the *internal* parallelization approach.
+The main question to answer was which approach to choose for the parallelization. GaudiMM spends the most part of the execution evaluating the solutions with the different objectives. Consequently, the multiprocessing option of DEAP was a possible improvement, for which it was necessary to change the GaudiMM code. This is regarded as the *internal* parallelization approach.
 
-But we also thought in another way of implementation, an *external*
-parallelization, consisting of a code that manually divides the main GAUDImm
-process in subprocesses for then gathers the solutions and generates a unique
-output.
+But there is another way of implementation, an *external* parallelization, consisting of a code that manually divides the main GaudiMM process in subprocesses, and then gather all the solutions at the end to generate a unique output.
 
-Initially the internal parallelization seemed smoother, cleaner and more
-optimise, however it wasn't easy to implement. DEAP uses the ``multiprocessing``
-module for the generation of subprocesses to carry out the parallel computing.
-To achieve this aim, it is necessary to perform a serialization process in
-which the process, with all its Python object hierarchy, is converted into a
-byte stream. Thus, the subprocess can managed by the ``multiprocessing`` module,
-and they can send information between them. 
+Initially the internal parallelization seemed smoother, cleaner and more optimise, however it wasn't easy to be implemented. DEAP uses the ``multiprocessing`` module for the generation of subprocesses to carry out the parallel computing. To achieve this aim, it is necessary to perform a serialization process, called **pickling**, in which a Python object hierarchy is converted into a byte stream (binary file or bytes-like object). Thanks to this serialization, the subprocesses can be managed by the ``multiprocessing`` module, and the information needed can be sent between them.
 
-The problem is that the *pickling* process of ``multiprocessing`` is led by the
-``pickle`` module that has limitations on what can be pickled. The classes are
-pickle by “fully qualified” name reference, not by value, and as a consequence,
-none of the class’s code or data is pickled. This problem is visible when
-applying the *internal* parallelization in GAUDImm with a ``PicklingError``
-exception, at the time of *pickling* the solutions. The obvious way to solve the
-problem is to rewrite the code in order to make the classes importable. However,
-GAUDImm solutions are built over Chimera classes, which rely in the core
-development of Chimera, which is written in C++. This would be a big problem
-and could extent the development a great deal.
+The problem is that the *pickling* process of ``multiprocessing`` is led by the ``pickle`` module, which has limitations on what can be pickled. The classes are pickle by “fully qualified” name reference, not by value, and as a consequence none of the class’ code or data is pickled. This problem is visible when applying the *internal* parallelization in GaudiMM with a ``PicklingError`` exception at the time of *pickling* the solutions. The obvious way to solve the problem is to rewrite the code in order to make the classes importable. However, GaudiMM solutions are built over Chimera classes. These classes rely on the core code of Chimera, which has chunks written in C++. Such programming language could be a big problem and could extent the development a lot.
 
-Therefore, the development of an *external* code responsible of generating and
-handling the subprocesses of GAUDImm, above the code, seemed more plausible.
+Therefore, the development of an *external* code responsible of generating and handling the subprocesses of GaudiMM, above the code, seemed more plausible.
 
 3.3. Methodology of the parallelization
 =======================================
 
-After selecting the development approach of the code another main question
-arose: **How do we parallelize a GA in the most efficient way?** There are
-several ways of GA parallelization, with different approximations. There were
-mainly two issue to decide: cross-over/isolation behaviour and the subprocesses
-simplification. 
+After selecting the development approach of the code another main question arose: **How do can the GA be parallelized in the most efficient way?** There are several ways of GA parallelization, with different approximations. But the focus was set mainly on two issues: cross-over/isolation behaviour and subprocesses simplification.
 
-The interaction, or absence of it, between the subprocesses can impact on the
-output of the GA. The sharing of information between the different subprocesses
-running a GA could be very positive; they might share their best solution every
-X generations. However, as we have seen in the previous section, this procedure
-would be hindered because of the *pickling*. Hence, we decide to use an
-isolation technique, in which the subprocesses were totally independent.
+The interaction, or absence of it, between the subprocesses can have an impact on the output of the GA. The sharing of information between the different subprocesses running a GA could be very positive, as they might share their best solution every X generations. However, as we have seen in the previous section, this procedure would be hindered because of the *pickling*. Hence, it was decided to use an isolation technique, in which the subprocesses were totally independent.
 
-This isolation can help the main GAUDImm process the find the best solutions.
-The fact that every subprocess is an independent GA, means that every subprocess
-begin with a unique initial population and will have an unequalled evolutionary
-process. As a consequence, the whole GAUDImm job will explore more solutions and
-will generate a very diverse pool of solutions ensuring an output of quality.
+This **isolation** can help the main GaudiMM process to find the best solutions. The fact that every subprocess is an independent GA means that every subprocess begins with a unique initial population and will have an unequalled evolutionary process. Hence, the whole GaudiMM job will explore more solutions and will generate a very diverse pool of solutions ensuring an output of quality.
 
-However, the creation of new subprocesses from a main one, can increase the
-computational demands if those new subprocesses are computationally equal, and
-we wouldn't talk of parallelization, but replication of the main process. For
-that reason, PGaudi generates new simpler subprocesses.
+However, the creation of new subprocesses from a main one can increase the computational demands if those new subprocesses are computationally equal. In such case, it cannot be considered as parallelization, but replication of the main process. For that reason, PGaudi generates new **simpler subprocesses**.
 
-Considering all these aspects, PGaudi is responsible of scan the initial input
-and its variables and generates new input files and executes parallel ``gaudi
-run`` process of them. These files have smaller values for the main two
-variables of the GA: the number of total generations and the number of
-individuals per population, to simplify the computation. The simplification is
-proportional to the number of subprocesses generated. 
+Moreover, this approach could solve one of the problems of the actual GaudiMM version, in which the GA got stuck with certain values in some jobs, usually local minimums, in the middle of the computational process, implying that the other part of the process was a loss of computational power. The simplification of the subprocesses could reduce the probability and the impact of this problem.
 
-Once all the subprocesses finished and the final output pool of solutions is
-generated PGaudi collects them all in a unique pool and checks for double
-solutions. The parallel GA can converge in the same solutions in certain
-situations, in which case, PGaudi removes one of the repeated solutions. 
+Considering all these aspects, PGaudi is responsible of scanning the initial input and its variables and generating new input files to execute them as parallel GaudiMM processes. These files have smaller values for the main two variables of the GA: the number of total generations and the number of individuals per population, to simplify the computation. The simplification is proportional to the number of subprocesses generated. For example, for 100 generations and 200 individuals, in a main PGaudi job parallelized in 4 cores, each of the subprocesses would have 25 generations and 50 individuals.
 
-At the end of the whole process, PGaudi gathered the remaining solutions in a
-unique output file and merge all the log files in the output directory.
+Once all the subprocesses finish and the final output pool of solutions is generated, PGaudi collects them all in a unique pool and checks for double solutions. The parallel GA can converge in the same solutions in certain situations, in which case, PGaudi removes the similar/repetitive solutions. 
+
+At the end of the whole process, PGaudi gathers the remaining solutions in a unique output file and merges all the log files in the output directory, without deleting the subprocesses’ output files.
 
 3.4. Coding PGaudi
 ==================
 
-3.4.1. Creation of files for parallelization
---------------------------------------------
+The PGaudi process is divided in four main steps, each one with different activities (Figure 3):
+
+3.4.1. Creation of the subfiles for parallelization
+---------------------------------------------------
 
 .. code-block:: console
 
     READ input_file.yaml 
         SAVE data of input_file.yaml
-        IF simplify processes
-            THEN simplify GA variables
-        WRITE data in new files
+        IF simplify processes is TRUE (Default)
+            THEN simplify GA variables of data
+        WRITE data in subfiles
 
-PGaudi uses the ``yaml`` code for reading the YAML input file and save the data
-in a Python dictionary object. If the user doesn't specify to not use the
-simplification of the subprocesses, the data variable is modified to decrease
-the values of the variables of the GA previously commented. Then, using the same
-module write as many files as subprocesses will generate. 
+PGaudi uses the ``yaml`` module for reading the YAML input file and saves the data in a Python dictionary object. By default, the program simplifies the data decreasing the values of the variables previously mentioned. However, the user can specify to not simplify the subprocesses and execute replicas.
+
+Then, using the same module, PGaudi writes with the data dictionary object as many subfiles as subprocesses generated.
 
 3.4.2. Generation of the subprocesses
 -------------------------------------
 
 .. code-block:: console
 
-    FOR file in new files (PARALLEL)
+    FOR file in subfiles (PARALLEL)
         EXECUTE a Gaudi run process of the file
     FOREND
 
-For the execution of the parallel computing PGaudi uses the ``multiprocessing``
-module and creates a ``multiprocessing.Pool`` which is an abstraction to handle
-the subprocess. The ``Pool`` is executed by the function
-``multiprocessing.Pool.map_async`` which receives a function, the execution
-``gaudi run``, and an iterable, the list of names of the new files. 
+For the execution of the parallel computing PGaudi uses the ``multiprocessing`` module and creates a ``multiprocessing.Pool`` which is an abstraction to handle the subprocess. The Pool is executed by the function ``multiprocessing.Pool.map_async`` which receives a function, the execution ``gaudi run``, and an iterable, the list of names of the new files.
 
-3.4.3. Removing of double solutions
------------------------------------
+3.4.3. Gathering solutions and removing similar ones
+----------------------------------------------------
 
 .. code-block:: console
 
-    SAVE all possible combinations of outputs pair
-
+    SAVE solutions obtained in unique populations
+    EXECUTE decompress solutions in tmp/ directory
+    
+    SAVE all possible combinations of outputs pair in combinations
+    
     FOR combination in combinations (PARALLEL)
         FOR pair of solutions in combination
             IF equal solutions
@@ -145,36 +91,27 @@ the subprocess. The ``Pool`` is executed by the function
 
     SAVE the new modified populations of solutions
 
-The removing of the double solutions runs in a parallel way too. Firstly, it
-saves all the possible combinations between all the outputs generated after the
-completion of the subprocesses. Then, compare the 3D structure of one solution
-to another solution's structure from another population.
+The removal of the very similar solutions runs in a parallel way too. Firstly, it saves all the possible combinations between all the outputs generated after the completion of the subprocesses. Then, it compares the 3D structure of one solution to another solution's structure from another population. The comparison of solutions from a same population is not required, as they are already different.
 
-The solutions from a same population are not compare because they are already
-different.
-
-3.4.4. Gathering of the solutions and output files
---------------------------------------------------
+3.4.4. Creation of output files
+-------------------------------
 
 .. code-block:: console
 
     FOR population in population
-        EXECUTE merge population
+        EXECUTE merge population in total population
     FOREND
     WRITE a unique output file with the total population
 
     FOR log-file in log-files generated
         EXECUTE merge log-file in a unique log-file output
     FOREND
+    
+For the creation of the ``.gaudi-output`` file, PGaudi merges all solutions in a unique population and uses a similar function to the original GaudiMM function to create file. For that, PGaudi saves all the solutions, with further information like the objectives used, in a Python dictionary object and with the ``yaml`` module to write it.
 
-The creation of the two output files doesn't have much mystery. PGaudi merges
-all the solutions in a unique population and uses a similar function to the
-original GAUDImm function to create the output file ``.gaudi-output``, which
-uses the ``yaml`` module. For that, PGaudi saves all the solutions, with other
-information in a Python dictionary object. 
+For the unique ``.gaudi-log`` file, PGaudi merge all log files basic methods to read and write files.
 
-For creating the unique ``.gaudi-log`` file, PGaudi merge with a simple function
-using basic methods for read and write files. 
+The structuring of the coding is divided in five modules which control the different steps of the process. The code and its organization are described in the API documentation, in the available in Appendix section 7.1.
 
 .. figure:: fig/pgaudi_scheme.png
 
@@ -182,39 +119,30 @@ using basic methods for read and write files.
     :align: center
     :scale: 75%
 
-    Diagram of the main idea of PGaudi's performance
+    **Figure 3. A)** Diagram of the main idea of PGaudi’s performance. **B)** Detailed scheme of the different activities in a PGaudi process. The program is both responsible of handling the parallelization and gathering the output.
 
 3.5. Usage
 ==========
 
-PGaudi is designed to be usable and therefore its simplicity. After its
-`installation <https://pgaudi.readthedocs.io/en/latest/installation.html>`_ the
-program is executed via the terminal with the command ``pgaudi``:
+PGaudi was designed with a user-oriented approach to promote its usability. After its
+`installation <https://pgaudi.readthedocs.io/en/latest/installation.html>`_ the program is executed via the terminal with the command ``pgaudi``:
 
 .. code-block:: console
 
     $ pgaudi path/to/some_file.gaudi-input
 
-After this command a process of PGaudi and its subprocesses will be generated.
-However, here are also some options that the user can specify:
+Such command triggers a process of PGaudi and its subprocesses will be generated. However, here are also some options that the user can specify:
 
 3.5.1. Subprocesses generated
 -----------------------------
 
-By default, PGaudi automatically detects the number of cores in the machine and
-sets this value as the number of subprocess generated. However, the user can
-specify the number of subprocesses in which the main process is divided with the
-option ``-p <PROCESSES>``.
+By default, PGaudi automatically detects the number of cores in the machine and sets this value as the number of subprocess generated. However, the user can specify the number of subprocesses in which the main process is divided with the option ``-p <PROCESSES>``.
 
-This is useful for using PGaudi in a cluster and if the user doesn't want to use
-all cores of the local machine.
+This is useful for using PGaudi in a cluster or if the user does not want to use all the cores of the local machine.
 
 3.5.2. Simplification of subprocesses
 -------------------------------------
-
-Automatically, PGaudi set this option in False to generate computationally
-simpler subprocesses. The user can change this behaviour with the option ``-e,
---equal`` and PGaudi will generate replicates of the main GAUDImm process. 
+PGaudi sets this option in False by default to generate computationally simpler subprocesses. The user can change this behaviour with the option ``-e, --equal`` and PGaudi will generate replicas of the main GaudiMM process, computationally equal.
 
 3.5.3. Summary
 --------------
@@ -234,15 +162,85 @@ Usage:
 
     $ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]
 
------
+3.6. Testing methodology
+========================
 
-Further information
--------------------
+For testing PGaudi we performed a benchmark with a set of 85 diverse protein-ligand systems used as a standard for testing the performance of docking programs (Hartshorn et al., 2007). As it has been mentioned before, GaudiMM has field for improvement when talking about molecular dockings as its success ratio is lower than other docking programs like GOLD. Thus, we decided to use this set to test the program in a challenging situation and in this way observe more easily substantial changes in its performance.
 
-For more reading of PGaudi, see the official documentation at:
-https://pgaudi.readthedocs.io/.
+The original set had very diverse systems, including systems with metal coordination. However, PGaudi uses the reference GaudiMM version for the parallel subprocesses and it does not use the extension for metals (Sciortino et al., 2019), so it was decided to remove them. Furthermore, there were systems whose MOL2 files had Dummy atoms, which were substituted by Carbone atoms to avoid problems with Chimera. After these modifications, a set of 71 different systems was obtained.
 
-The source code is available in GitHub at:
-https://github.com/andresginera/pgaudi and in the Appendix section.
+For the performance optimization test, 12 systems from this set were randomly selected, with the PDB codes: 1IA1, 1IG3, 1J3J, 1JLA, 1K3U, 1KE5, 1MMV, 1N1M, 1N2J ,1N2V, 1N46 and 1NAV. The scores obtained, the success ratio and the execution time for different jobs of PGaudi and GaudiMM for the 12 systems were then compared. The PGaudi jobs were performed with a parallelization of eight cores, generating eight independent subprocesses. Moreover, three different situations and different GA variables values for each system were applied (Table 2).
 
-The API documentation is as well in the Appendix section.
+Table 2
+
+Another test was carried out to obtain the whole success ratio for molecular docking with the 71 systems set. For the test, PGaudi with 200 generations and 400 individuals for the GA variables was used because with them, robust and constant scores’ values were obtained with the reduced set.
+
+All the jobs were executed three times and with a **search radius** of 5 Å. The search radius determines the search sphere from an **anchor atom** and a radius value. This search sphere is the space where the program can explore different conformations of the ligand, as long as the anchor atom is inside, so, part of the ligand can stay outside the sphere. In this way, the overall search space will depend both on the search radius and the size of the ligand.
+
+To select this value, another test for checking the output was performed with different values of the search radius: 1 Å, 5 Å and 6 Å, selecting as anchor atom the closest atom to the mass centre. With 1Å very good results were obtained, with a 90.9 % of success (Table 3), but they weren’t fair enough because in the systems with ligands of little size the whole search space was too small and GaudiMM could barely explore different solutions.
+
+Regarding the other two lengths of search radius, similar results were retrieved, but with a slight improvement for 5 Å (Table 3). Moreover, a manual check with the molecular framework UCSF Chimera was performed, to see how the whole search space varied with the size of the ligands and if that space let GaudiMM to explore all the active regions space (Figure 4).
+
+Table 3
+
+The objectives used for the jobs were:
+
+* **Clashes** to avoid the molecules to collapse with intramolecular interactions.
+* **Vina** to score the free energy of binding and the bound conformation (Trott & Olson, 2010).
+
+The rest of the parameters used are described in the Appendix 7.2 section with a template input file.
+
+Figure 4
+
+3.7. Results
+============
+
+3.7.1. Benchmarking comparative
+-------------------------------
+
+The comparison in the execution time showed a great decrease in the mean execution time per calculation for each situation in approximate 50 times (Figure 5). However, comparing the vina score of the results, there were better results for the non-parallelized jobs (Figure 6). In all situations, they obtained more negative scores indicating better generated solutions.
+
+This difference between PGaudi and reference GaudiMM was smaller with larger values for the GA variables, going from a difference of 28.22 % for the mean vina score in the systems with 100 generations and 200 individuals (100/200) to a difference of 7.25 % for systems with 200 generations and 400 individuals (200/400). Moreover, the standard deviation of the vina score obtained from the replicas also decreased from ±0.91 to ±0.52 in the case of the GaudiMM jobs, and from ±1.69 to ±0.40 for PGaudi jobs. Therefore, the decrease was more significant for the parallelized jobs. Such decrease is also visible in the mean RMSD of the solutions (Figure 1S).
+
+Figure 5
+
+Figure 6
+
+Vina score is an indicative of better solutions and should correspond with solutions geometrically similar to the cryptographically obtained ligand model, the **reference ligand**. However, this could not always be the case, so the computation of the success ratios was considered for the best one, the top 5, the top 10 and the top 20 vina score solutions, apart from all solutions. In total, we calculated five success ratios for each replica.
+
+Here, the success ratio is presented for the top 10 solutions (Figure 7), being the other top success ratios similar to this. Initially, in the condition 100/200, it was observed that the GaudiMM results were better than the PGaudi results for the 2 Å threshold. However, as the GA variables values were increased, an overall improvement was observed in every threshold for PGaudi. At this point, the variation in the GA variables values demonstrated to significantly affect the PGaudi results.
+
+Figure 7
+
+Then, this variation was observed in more detail for the GaudiMM (Figure 8) and PGaudi (Figure 9) for top 10. In the first ones, there was not much difference in the solutions obtained, only worse results for the middle condition, probably due to the stochastic nature of the GA. Nevertheless, for the PGaudi results a clear improvement with larger GA variables values was observed. This confirmed that these variables **did affect** the PGaudi results.
+
+Figure 8
+
+Figure 9
+
+Later, the success ratio of PGaudi for all solutions was evaluated and not only for the top 10 solutions. Surprisingly, in this case, the solutions were always better than GaudiMM results (Figure 10), and there was not much difference between the different conditions (Figure 2S).
+
+Figure 10
+
+After that, another PGaudi tests for lesser values of GA variables was decided to be executed: 100/100, 75/100, 48/96, 50/50, 50/25 and 24/12. It was observed that the success ratios of all the solutions were similar except for the 24/12 condition, where the success ratio achieved a 16.67 % for a RMSD threshold of 2 Å for solutions (data not shown).
+
+Taking these results into account it is thought that the isolation of the subprocesses generated allowed PGaudi to search more solutions and greatly expand the conformational space explored. Having independents and unique processes of evolution increases the probability of generating different solutions, and because of that, even in poor GA variables conditions, PGaudi is able to find possible optimal solutions candidates. The strategy of generate isolated “islands” is also used by GOLD and is a powerful tool for its excellent results.
+
+However, the **simplification** is responsible of the decrease in the vina score achieved by the solutions. And as a consequence, although PGaudi generates more solutions than GaudiMM because of the multiple subprocesses, these solutions are not sufficiently optimised to have an excellent vina score. There are multiple good solutions, but with a variety of scores, and not always the best scores; in other words, the results are not consistent. The increase of these variables has generated better solutions, with better score and less variability on it. However, this increase may have a limit in the improvement of solutions because no changes for GaudiMM conditions were observed.
+
+On the other hand, this simplification is responsible of the great improvement in the execution time, apart from the fact that more cores were used. The increase on the computationally demands by the GA is not lineal but exponential, so as a result, the reduction of the variables values in eight does not reduce the execution time in eight, but in approximately fifty times.
+
+Therefore, there is a balance between execution time and the consistency of the output affected directly by the GA variables values and their simplification and the generation of isolated subprocesses with its own evolutionary process.
+
+3.7.2. Ratio success of complete benchmarking
+---------------------------------------------
+
+The results of the complete benchmarking were analysed calculating the success ratio for the best, top 5, top 10 and top 20 vina score and for all solutions (Figure 11). They were consistent with the above results presented and seemed promising.
+
+In the original GaudiMM paper (Rodríguez-Guerra Pedregal et al., 2017) it was performed a benchmark with 4 datasets similar to the one used in this Thesis. The results of that benchmark were, considering all solutions, about 45.45 % for 2,5 Å threshold and 57.58 % for 3Å threshold. There is a significant difference between that results with the obtained with PGaudi: 45.45 % vs 71.01 % and 57.58 % vs 76.81 %.
+
+This improvement on the success ratio is probably due to the generation of isolated subprocesses, with their higher GA variables values to maintain the output consistency, but also because the GaudiMM version used in this Thesis has modifications. In the newer version, the anchor atom is the closest atom to the mass centre, meanwhile, in the older GaudiMM version, is the first atom of the ligand sequence. The search radius was different too, using this time a smaller radius of 5 Å, instead of 12 Å.
+
+All these modifications demonstrate that there is still plenty room for improving the program and algorithm to achieve better success ratios, being the parallelization a key factor for it.
+
+Figure 11
