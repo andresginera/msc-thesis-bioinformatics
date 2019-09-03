@@ -13,11 +13,3 @@ PGaudi is a package for the optimization of the performance of the GaudiMM suite
 • **pgaudi.similarity** defines the diversity enhancers.
 • **pgaudi.create_output** is the responsible of creating all output files.
 
-7.1.1. pgaudi.main
-------------------
-
-Main module of the package from which the main process is run and the parallelization is controlled.
-
-pgaudi.main.**main** ()
-
-  Main function that gathers the arguments from the command line with parse_cli () and execute the function run ().
