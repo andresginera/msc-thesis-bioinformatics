@@ -149,15 +149,22 @@ PGaudi sets this option in False by default to generate computationally simpler 
 
 List with all options:
 
-  -p <PROCESSES>  Number of processes in which the main process is divided.
-                  [Default = cores in the machine]
-  -e, --equal     Set the new subprocesses generated computationally equal to
-                  the main process. [Default = False]
-  -h, --help      Show the help message and exit.
-  -v, --version   Show program's version number and exit.
++----------------+------------------------------------------------------------------------------+----------------------+
+| Option         | Definition                                                                   | Default              |
++================+==============================================================================+======================+
+| -p <PROCESSES> | Number of processes in which the main process is divided                     | Cores in the machine |
++----------------+------------------------------------------------------------------------------+----------------------+
+| -e, --equal    | Set the new subprocesses generated computationally equal to the main process | False                |
++----------------+------------------------------------------------------------------------------+----------------------+
+| -h, --help     | Show the help message and exit                                                                      |
++----------------+-----------------------------------------------------------------------------------------------------+
+| -v, --version  | Show program's version number and exit                                                              |
++----------------+-----------------------------------------------------------------------------------------------------+
+| ``$ pgaudi path/to/input_file.yaml [-p <PROCESSES>] [-e] [-h] [-v]``                                                 |
++----------------------------------------------------------------------------------------------------------------------+
 
 Usage:
-
+                
 .. code-block:: console
 
     $ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]
