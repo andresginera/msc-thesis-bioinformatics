@@ -160,14 +160,8 @@ List with all options:
 +----------------+-----------------------------------------------------------------------------------------------------+
 | -v, --version  | Show program's version number and exit                                                              |
 +----------------+-----------------------------------------------------------------------------------------------------+
-| ``$ pgaudi path/to/input_file.yaml [-p <PROCESSES>] [-e] [-h] [-v]``                                                 |
+|           ``$ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]``                    |
 +----------------------------------------------------------------------------------------------------------------------+
-
-Usage:
-                
-.. code-block:: console
-
-    $ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]
 
 3.6. Testing methodology
 ========================
