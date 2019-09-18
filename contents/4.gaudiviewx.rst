@@ -20,7 +20,12 @@ The graphical interface of GaudiViewX (Figure 12) uses PyQt5 instead of the ``tk
 
 The functionalities of GaudiView were desirable in the new version: basic file handling, filtering and clustering. But also, it was interesting to add more utilities like the ability of editing the output file. In order to make a more intuitional interface, the utilities were grouped in a main toolbar, a more recognizable trait for the user.
 
-Figure 12
+.. figure:: fig/12.gaudiviewx.png
+    :alt: Visualization of the interface GaudiViewX.
+    :align: center
+    :scale: 75%
+    
+    **Figure 12.** General visualization of GaudiViewX for Linux platform.
 
 4.3. Usage
 ==========
@@ -59,7 +64,12 @@ There are five utilities in the toolbar (Figure 13):
 
 5. **Help**. Displays the internal help window.
 
-Figure 13
+.. figure:: fig/13.toolbar-filter-clustering.png
+    :alt: Visualization of the GaudiViewX's toolbar, filtering and clustering.
+    :align: center
+    :scale: 75%
+    
+    **Figure 13.** ▶ Toolbar graphical interface with its utilities. ▶ Multi-filter dialog windows interface. Initially only one condition is showed and the user can select the objective, but the user can add more with the plus bottom in the bottom-left corner. These conditions can be preceded by AND/OR, modifying the behaviour of the whole filtering condition. In the case showed, after the filtering the solutions kept will be those with a vina score equal or less than -10,00 and those with clashes less than 100,00 and more than 3 hydrogens bonds. ▶ Clustering dialog interface. The images are retrieved from the Linux version.
 
 4.3.3. Command Line
 -------------------
