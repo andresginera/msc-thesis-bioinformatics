@@ -110,7 +110,7 @@ GaudiMM is based on Python 2 and the NGSA-II used is applied by the Python modul
 5.	**Similarity variables**: they specify how the program will distinguish between very similar solutions.
 
 
-.. figure:: fig/NGSA-II.png
+.. figure:: fig/1.ngsa-ii.png
     :alt: Pie representing all the elements conforming the UX.
     :align: center
 
@@ -140,7 +140,7 @@ Other issue concerned in Bioinformatics tools is the User Experience (UX). The U
 
 We can identify seven main factors in the UX (Peter Morville, 2019) (Figure 2):
 
-.. figure:: fig/ux_pie.png
+.. figure:: fig/2.diagram-ux.png
     :alt: Pie representing all the elements conforming the UX.
     :align: center
 
