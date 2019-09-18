@@ -5,11 +5,12 @@
 7.1. PGaudi’s API documentation
 ===============================
 
-PGaudi is a package for the optimization of the performance of the GaudiMM suite by external parallelization. It consists of five modules:
+The API documentation can be seen in `PDF format <https://buildmedia.readthedocs.org/media/pdf/pgaudi/latest/pgaudi.pdf#chapter.5>`_.
 
-• **pgaudi.main** is the main module responsible of the main run of a pgaudi job and the parsing of arguments.
-• **pgaudi.parallel** has the functions for the parallelization.
-• **pgaudi.treatment** store the output individuals of the subprocesses.
-• **pgaudi.similarity** defines the diversity enhancers.
-• **pgaudi.create_output** is the responsible of creating all output files.
+7.2. Testing input file template
+================================
 
+
+
+7.3. Additional testing data
+============================
