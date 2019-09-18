@@ -113,7 +113,7 @@ For the unique ``.gaudi-log`` file, PGaudi merge all log files basic methods to 
 
 The structuring of the coding is divided in five modules which control the different steps of the process. The code and its organization are described in the API documentation, in the available in Appendix section 7.1.
 
-.. figure:: fig/pgaudi_scheme.png
+.. figure:: fig/3.pgaudi-scheme.png
 
     :alt: Diagram of PGaudi's operation
     :align: center
@@ -147,21 +147,23 @@ PGaudi sets this option in False by default to generate computationally simpler 
 3.5.3. Summary
 --------------
 
-List with all options:
+.. table:: **Table 1.** Summary of PGaudi's usage.
 
-+----------------+------------------------------------------------------------------------------+----------------------+
-| Option         | Definition                                                                   | Default              |
-+================+==============================================================================+======================+
-| -p <PROCESSES> | Number of processes in which the main process is divided                     | Cores in the machine |
-+----------------+------------------------------------------------------------------------------+----------------------+
-| -e, --equal    | Set the new subprocesses generated computationally equal to the main process | False                |
-+----------------+------------------------------------------------------------------------------+----------------------+
-| -h, --help     | Show the help message and exit                                                                      |
-+----------------+-----------------------------------------------------------------------------------------------------+
-| -v, --version  | Show program's version number and exit                                                              |
-+----------------+-----------------------------------------------------------------------------------------------------+
-|           ``$ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]``                    |
-+----------------------------------------------------------------------------------------------------------------------+
+    :align: center
+    
+    +----------------+------------------------------------------------------------------------------+----------------------+
+    | Option         | Definition                                                                   | Default              |
+    +================+==============================================================================+======================+
+    | -p <PROCESSES> | Number of processes in which the main process is divided                     | Cores in the machine |
+    +----------------+------------------------------------------------------------------------------+----------------------+
+    | -e, --equal    | Set the new subprocesses generated computationally equal to the main process | False                |
+    +----------------+------------------------------------------------------------------------------+----------------------+
+    | -h, --help     | Show the help message and exit                                                                      |
+    +----------------+-----------------------------------------------------------------------------------------------------+
+    | -v, --version  | Show program's version number and exit                                                              |
+    +----------------+-----------------------------------------------------------------------------------------------------+
+    |           ``$ pgaudi path/to/some_file.gaudi-input [-p int_number_of_subprocess] [-e] [-h] [-v]``                    |
+    +----------------------------------------------------------------------------------------------------------------------+
 
 3.6. Testing methodology
 ========================
@@ -172,7 +174,14 @@ The original set had very diverse systems, including systems with metal coordina
 
 For the performance optimization test, 12 systems from this set were randomly selected, with the PDB codes: 1IA1, 1IG3, 1J3J, 1JLA, 1K3U, 1KE5, 1MMV, 1N1M, 1N2J ,1N2V, 1N46 and 1NAV. The scores obtained, the success ratio and the execution time for different jobs of PGaudi and GaudiMM for the 12 systems were then compared. The PGaudi jobs were performed with a parallelization of eight cores, generating eight independent subprocesses. Moreover, three different situations and different GA variables values for each system were applied (Table 2).
 
-Table 2
+.. csv-table:: **Table 2.** Different values of number of generations and number of individuals per population for each replica.
+
+   :header: "Replica", "Number of generations", "Number of individuals per population"
+   :align: center
+
+   1, 100, 200
+   2, 160, 320
+   3, 200, 400
 
 Another test was carried out to obtain the whole success ratio for molecular docking with the 71 systems set. For the test, PGaudi with 200 generations and 400 individuals for the GA variables was used because with them, robust and constant scores’ values were obtained with the reduced set.
 
@@ -182,7 +191,14 @@ To select this value, another test for checking the output was performed with di
 
 Regarding the other two lengths of search radius, similar results were retrieved, but with a slight improvement for 5 Å (Table 3). Moreover, a manual check with the molecular framework UCSF Chimera was performed, to see how the whole search space varied with the size of the ligands and if that space let GaudiMM to explore all the active regions space (Figure 4).
 
-Table 3
+.. csv-table:: **Table 3.** Success ratio for different values of search radius of 1 Å, 5 Å and 6 Å at different RMSD thresholds compared against the reference ligand.
+
+   :header: "1 Å", "5 Å", "6 Å", "RMSD threshold"
+   :align: center
+
+   "90.9 %", "72.7 %", "54.5 %", "< 2 Å"
+   "90.9 %", "81.8 %", "63.6 %", "< 2.5 Å"
+   "90.9 %", "90.9 %", "81.8 %", "< 3 Å"
 
 The objectives used for the jobs were:
 
@@ -191,7 +207,13 @@ The objectives used for the jobs were:
 
 The rest of the parameters used are described in the Appendix 7.2 section with a template input file.
 
-Figure 4
+.. figure:: fig/4.search-radius-5a.png
+
+    :alt: Search radius of 5 Å for the ligand 1N2J.
+    :align: center
+    :scale: 75%
+
+    **Figure 4.** In green, search sphere with a search radius of 5 Å for the ligand 1N2J (represented in yellow sticks). The residues of the binding site are showed in blue sticks.
 
 3.7. Results
 ============
@@ -203,25 +225,62 @@ The comparison in the execution time showed a great decrease in the mean executi
 
 This difference between PGaudi and reference GaudiMM was smaller with larger values for the GA variables, going from a difference of 28.22 % for the mean vina score in the systems with 100 generations and 200 individuals (100/200) to a difference of 7.25 % for systems with 200 generations and 400 individuals (200/400). Moreover, the standard deviation of the vina score obtained from the replicas also decreased from ±0.91 to ±0.52 in the case of the GaudiMM jobs, and from ±1.69 to ±0.40 for PGaudi jobs. Therefore, the decrease was more significant for the parallelized jobs. Such decrease is also visible in the mean RMSD of the solutions (Figure 1S).
 
-Figure 5
+.. figure:: fig/5.comparison-mean-execution-time.png
 
-Figure 6
+    :alt: Comparison of the mean execution times of PGaudi and GaudiMM.
+    :align: center
+    :scale: 75%
+
+    **Figure 5.** Comparison of the mean execution times for each of the jobs performed by PGaudi and GaudiMM for each of the conditions. For the mean calculation only the best solution of each replica for each condition has been considered.
+
+.. figure:: fig/6.comparison-mean-vina-score.png
+
+    :alt: Comparison of the mean vina scores of PGaudi and GaudiMM.
+    :align: center
+    :scale: 75%
+
+    **Figure 6.** Comparison of the mean vina scores for each of the jobs performed by PGaudi and GaudiMM for each of the conditions. For mean calculation only the best solution of each replica for each condition has been considered.
 
 Vina score is an indicative of better solutions and should correspond with solutions geometrically similar to the cryptographically obtained ligand model, the **reference ligand**. However, this could not always be the case, so the computation of the success ratios was considered for the best one, the top 5, the top 10 and the top 20 vina score solutions, apart from all solutions. In total, we calculated five success ratios for each replica.
 
 Here, the success ratio is presented for the top 10 solutions (Figure 7), being the other top success ratios similar to this. Initially, in the condition 100/200, it was observed that the GaudiMM results were better than the PGaudi results for the 2 Å threshold. However, as the GA variables values were increased, an overall improvement was observed in every threshold for PGaudi. At this point, the variation in the GA variables values demonstrated to significantly affect the PGaudi results.
 
-Figure 7
+.. figure:: fig/7.success-ratios-top10.png
+
+    :alt: Success ratios obtained for top 10.
+    :align: center
+    :scale: 75%
+
+    **Figure 7.** Success ratios for each condition and situation with different RMSD thresholds of the then best solutions.
 
 Then, this variation was observed in more detail for the GaudiMM (Figure 8) and PGaudi (Figure 9) for top 10. In the first ones, there was not much difference in the solutions obtained, only worse results for the middle condition, probably due to the stochastic nature of the GA. Nevertheless, for the PGaudi results a clear improvement with larger GA variables values was observed. This confirmed that these variables **did affect** the PGaudi results.
 
-Figure 8
+.. figure:: fig/8.gaudimm-success-ratios-top10.png
 
-Figure 9
+    :alt: Success ratios obtained by GaudiMM for top 10.
+    :align: center
+    :scale: 75%
+
+    **Figure 8.** Success ratios of the best ten solutions generated by GaudiMM for the different conditions and RMSD thresholds.
+
+.. figure:: fig/9.pgaudi-success-ratios-top10.png
+
+    :alt: Success ratios obtained by PGaudi for top 10.
+    :align: center
+    :scale: 75%
+
+    **Figure 9.** Success ratios of the best 10 solutions generated by PGaudi for the different conditions and RMSD thresholds.
 
 Later, the success ratio of PGaudi for all solutions was evaluated and not only for the top 10 solutions. Surprisingly, in this case, the solutions were always better than GaudiMM results (Figure 10), and there was not much difference between the different conditions (Figure 2S).
 
-Figure 10
+.. figure:: fig/10.success-ratios-all.png
+
+    :alt: Success ratios obtained for all solutions.
+    :align: center
+    :scale: 75%
+
+    **Figure 10.** Success ratios for each condition and situation with different RMSD thresholds of all solutions.
+
 
 After that, another PGaudi tests for lesser values of GA variables was decided to be executed: 100/100, 75/100, 48/96, 50/50, 50/25 and 24/12. It was observed that the success ratios of all the solutions were similar except for the 24/12 condition, where the success ratio achieved a 16.67 % for a RMSD threshold of 2 Å for solutions (data not shown).
 
@@ -244,4 +303,10 @@ This improvement on the success ratio is probably due to the generation of isola
 
 All these modifications demonstrate that there is still plenty room for improving the program and algorithm to achieve better success ratios, being the parallelization a key factor for it.
 
-Figure 11
+.. figure:: fig/11.complete-benchmarking.png
+
+    :alt: Success ratios for the complete benchmarking performed by PGaudi.
+    :align: center
+    :scale: 75%
+
+    **Figure 11.** Success ratios for the complete benchmarking performed by PGaudi with 200 generations and 400 individuals per population for different RMSD threshold. It has been selected five groups of solutions to observe the variation on the success ratio.
